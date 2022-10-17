@@ -10,32 +10,49 @@
       </thead>
     
       <tbody>
-        <tr>
-          <td>Book name</td>
-          <td>Author</td>
-          <td>Price</td>
+
+        <tr v-for="record in records" :key="record.BookId">
+          <td>{{record.name}}</td>
+          <td>{{record.author}}</td>
+          <td>{{record.price}}</td>
         </tr>
 
-        <tr>
-          <td>Book name</td>
-          <td>Author</td>
-          <td>Price</td>
-        </tr>
-
-        <tr>
-          <td>Book name</td>
-          <td>Author</td>
-          <td>Price</td>
-        </tr>
       </tbody>
     </table>
+    <PaginatorInst 
+      :page-count="5"
+      :click-handler="changePage"
+      :prev-text="'Prev'"
+      :next-text="'Next'"
+      :container-class="'className'"
+    />
   </div>
   
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  
+  data() {
+    return {
+      records: []
+    }
+  },
+
+  methods: {
+    loadData() {
+      axios.get("https://localhost:7147/api/Book", { crossDomain: true }).then((response) => {
+        this.records = response.data;
+      });
+    },
+    changePage() {
+
+    }
+  },
+
+  beforeMount() {
+    this.loadData();
+  }
 }
 </script>
 

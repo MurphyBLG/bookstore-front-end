@@ -1,58 +1,57 @@
 <template>
   <div class="books_table_wrapper">
-    <table class="books_table">
-      <thead>
-        <tr>
-          <th>Book name</th>
-          <th>Author</th>
-          <th>Price</th>
-        </tr>
-      </thead>
+    <div class="grid_wrapper">
+      
+      <BooksTableControllPanel />
     
-      <tbody>
+      <table class="books_table">
+        <thead>
+          <tr>
+            <th>Book name</th>
+            <th>Author</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+      
+        <tbody>
 
-        <tr v-for="record in records" :key="record.BookId">
-          <td>{{record.name}}</td>
-          <td>{{record.author}}</td>
-          <td>{{record.price}}</td>
-        </tr>
+          <tr v-for="record in records" :key="record.BookId">
+            <td>{{record.name}}</td>
+            <td>{{record.author}}</td>
+            <td>{{record.price}}</td>
+          </tr>
 
-      </tbody>
-    </table>
-    <PaginatorInst 
-      :page-count="5"
-      :click-handler="changePage"
-      :prev-text="'Prev'"
-      :next-text="'Next'"
-      :container-class="'className'"
-    />
+        </tbody>
+      </table>
+
+      <BooksTablePagination :recordsCnt="records.length"/>
+    </div>
+    
   </div>
   
 </template>
 
 <script>
 import axios from 'axios'
+import BooksTableControllPanel from '@/components/BooksTableControllPanel.vue';
+import BooksTablePagination from '@/components/BooksTablePagination.vue';
 export default {
-  data() {
-    return {
-      records: []
-    }
-  },
-
-  methods: {
-    loadData() {
-      axios.get("https://localhost:7147/api/Book", { crossDomain: true }).then((response) => {
-        this.records = response.data;
-      });
+    data() {
+        return {
+            records: []
+        };
     },
-    changePage() {
-
-    }
-  },
-
-  beforeMount() {
-    this.loadData();
-  }
+    methods: {
+        loadData() {
+          axios.get("https://localhost:7147/api/Book", { crossDomain: true }).then((response) => {
+            this.records = response.data;
+          });
+        }
+    },
+    beforeMount() {
+      this.loadData();
+    },
+    components: { BooksTableControllPanel, BooksTablePagination }
 }
 </script>
 
@@ -64,12 +63,13 @@ export default {
     align-content: center;
     height: auto;
     margin: auto;
+    margin-top: 100px;
   }
 
   .books_table {
     border-collapse: collapse;
 
-    margin: 25px 0;
+    margin: 10px 0;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -98,5 +98,9 @@ export default {
 
   .books_table tbody tr:last-of-type {
     border-bottom: 2px solid #D0B097;
+  }
+
+  .grid_wrapper {
+    display: grid;
   }
 </style>

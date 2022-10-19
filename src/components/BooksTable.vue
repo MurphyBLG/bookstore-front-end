@@ -1,33 +1,31 @@
 <template>
-    <table class="books_table">
-        <thead>
-          <tr>
-            <th style="width: 40px"></th>
-            <th>Book name</th>
-            <th>Author</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-      
-        <tbody>
 
-          <tr v-for="record in recordsToShow" :key="record.BookId">
-            <td style="width: 40px">
-              <input type="radio" value="{{record.BookId}}" name="row">
-            </td>
-            <td>{{record.name}}</td>
-            <td>{{record.author}}</td>
-            <td>{{record.price}}</td>
-          </tr>
-
-        </tbody>
-    </table>
-
-    <div class="books_table_pagination">
-      <MyBtn class="go_to_left_btn" btnText="<-" @click="previousPage()"/>
-      <MyBtn class="go_to_left_btn" :btnText="totalPage" />
-      <MyBtn class="go_to_right_btn" btnText="->" @click="nextPage()"/>
-    </div>
+  <table class="books_table">
+      <thead>
+        <tr>
+          <th style="width: 40px"></th>
+          <th>Book name</th>
+          <th>Author</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+    
+      <tbody>
+        <tr v-for="record in recordsToShow" :key="record.BookId">
+          <td style="width: 40px">
+            <input type="radio" value="{{record.BookId}}" name="row">
+          </td>
+          <td>{{record.name}}</td>
+          <td>{{record.author}}</td>
+          <td>{{record.price}}</td>
+        </tr>
+      </tbody>
+  </table>
+  <div class="books_table_pagination">
+    <MyBtn class="go_to_left_btn" btnText="<-" @click="previousPage()"/>
+    <MyBtn class="go_to_left_btn" :btnText="totalPage" />
+    <MyBtn class="go_to_right_btn" btnText="->" @click="nextPage()"/>
+  </div>
 </template>
 
 <script>
@@ -58,7 +56,7 @@ export default {
             var ele = document.getElementsByName("row");
             for(var i=0;i<ele.length;i++)
               ele[i].checked = false;
-              
+
             this.page++;
         },
         previousPage() {

@@ -2,6 +2,7 @@
     <table class="books_table">
         <thead>
           <tr>
+            <th style="width: 40px"></th>
             <th>Book name</th>
             <th>Author</th>
             <th>Price</th>
@@ -11,6 +12,9 @@
         <tbody>
 
           <tr v-for="record in recordsToShow" :key="record.BookId">
+            <td style="width: 40px">
+              <input type="radio" value="{{record.BookId}}" name="row">
+            </td>
             <td>{{record.name}}</td>
             <td>{{record.author}}</td>
             <td>{{record.price}}</td>
@@ -46,12 +50,28 @@ export default {
           });
         },
         nextPage() {
-            // Добавить ошибку > количества доступных страниц
+            if (this.page + 2 > this.pages) {
+              alert(`Page number can't be more than ${this.pages}`);
+              return;
+            }
+
+            var ele = document.getElementsByName("row");
+            for(var i=0;i<ele.length;i++)
+              ele[i].checked = false;
+              
             this.page++;
         },
         previousPage() {
-            // Добавить ошибку <0
-            this.page--;
+          if (this.page === 0) {
+            alert(`Page number can't be less than 0`);
+            return;
+          }
+
+          var ele = document.getElementsByName("row");
+            for(var i=0;i<ele.length;i++)
+              ele[i].checked = false;
+
+          this.page--;
         }
     },
     beforeMount() {
@@ -75,6 +95,8 @@ export default {
   .books_table {
     border-collapse: collapse;
 
+    width: 1000px;
+
     margin: 10px 0;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
@@ -91,6 +113,8 @@ export default {
 
   .books_table th, 
   .books_table td {
+    text-align: center;
+    width: 320px;
     padding: 12px 15px;
   }
 

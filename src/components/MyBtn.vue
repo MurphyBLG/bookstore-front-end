@@ -43,10 +43,18 @@ export default {
         background-color: #D0B097;
     }
 
+    button.go_to_right_btn:hover {
+        background-image: linear-gradient(rgb(0 0 0/20%) 0 0);
+    }
+
     button.go_to_left_btn {
         color: white;
         border: none;
         border-radius: 5px;
         background-color: #D0B097;
+    }
+
+    button.go_to_left_btn:hover {
+        background-image: linear-gradient(rgb(0 0 0/20%) 0 0);
     }
 </style>

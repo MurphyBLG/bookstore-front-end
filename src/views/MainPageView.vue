@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import BooksTable from '@/components/BooksTable.vue';
+import BooksTable from '@/components/BooksTableComponent/BooksTable/BooksTable.vue';
 export default {
   components: { BooksTable }
 }

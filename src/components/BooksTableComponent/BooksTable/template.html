@@ -1,0 +1,34 @@
+<AddBook v-if="addBookFormIsShown" @close="toggleAddButton(); loadData()" />
+<div class="table_header">
+    <MyBtn class="add_book_btn" btnText="Add book" @click="toggleAddButton" />
+    <MyBtn class="edit_book_btn" btnText="Edit book" />
+    <MyBtn class="delete_book_btn" btnText="Delete book" />
+</div>
+
+<table class="books_table">
+    <thead>
+        <tr>
+            <th style="width: 40px"></th>
+            <th>Book name</th>
+            <th>Author</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr v-for="record in recordsToShow" :key="record.BookId">
+            <td style="width: 40px">
+                <input type="radio" value="{{record.BookId}}" name="row">
+            </td>
+            <td>{{record.name}}</td>
+            <td>{{record.author}}</td>
+            <td>{{record.price}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="books_table_pagination">
+    <MyBtn class="go_to_left_btn" btnText="<-" @click="previousPage()" />
+    <MyBtn class="go_to_left_btn" :btnText="totalPage" />
+    <MyBtn class="go_to_right_btn" btnText="->" @click="nextPage()" />
+</div>

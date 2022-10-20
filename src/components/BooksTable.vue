@@ -1,5 +1,12 @@
 <template>
 
+  <AddBook v-if="addBookFormIsShown" @close="toggleAddButton(); loadData()"/>
+  <div class="table_header">
+      <MyBtn class="add_book_btn" btnText="Add book" @click="toggleAddButton"/>
+      <MyBtn class="edit_book_btn" btnText="Edit book"/>
+      <MyBtn class="delete_book_btn" btnText="Delete book"/>
+  </div>
+
   <table class="books_table">
       <thead>
         <tr>
@@ -21,6 +28,7 @@
         </tr>
       </tbody>
   </table>
+
   <div class="books_table_pagination">
     <MyBtn class="go_to_left_btn" btnText="<-" @click="previousPage()"/>
     <MyBtn class="go_to_left_btn" :btnText="totalPage" />
@@ -30,17 +38,19 @@
 
 <script>
 import axios from 'axios'
-import  MyBtn from './MyBtn.vue'
+import MyBtn from './MyBtn.vue'
+import AddBook from './AddBook.vue'
 
 export default {
     data() {
         return {
             records: [],
             page: 0,
-            recordsPerPage: 5
+            recordsPerPage: 5,
+            addBookFormIsShown: false,
         };
     },
-    components: { MyBtn },
+    components: { AddBook, MyBtn },
     methods: {
         loadData() {
           axios.get("https://localhost:7147/api/Book", { crossDomain: true }).then((response) => {
@@ -70,7 +80,10 @@ export default {
               ele[i].checked = false;
 
           this.page--;
-        }
+        },
+        toggleAddButton() {
+          this.addBookFormIsShown = !this.addBookFormIsShown;
+        },
     },
     beforeMount() {
       this.loadData();
@@ -131,6 +144,11 @@ export default {
   .books_table_pagination {
     display: inline-flex;
     justify-content: space-between;
+    height: 25px;
+  }
+
+  .table_header {
+    display: inline-flex;
     height: 25px;
   }
 </style>

@@ -1,7 +1,6 @@
 <template>
   <div class="books_table_wrapper">
     <div class="grid_wrapper">
-      <BooksTableControllPanel />
       
       <BooksTable />
     </div>
@@ -9,10 +8,9 @@
 </template>
 
 <script>
-import BooksTableControllPanel from '@/components/BooksTableControllPanel.vue';
 import BooksTable from '@/components/BooksTable.vue';
 export default {
-  components: { BooksTableControllPanel, BooksTable }
+  components: { BooksTable }
 }
 </script>
 

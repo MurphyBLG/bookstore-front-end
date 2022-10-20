@@ -57,4 +57,15 @@ export default {
     button.go_to_left_btn:hover {
         background-image: linear-gradient(rgb(0 0 0/20%) 0 0);
     }
+
+    button.confirm_book_addition {
+        color: white;
+        border: none;
+        border-radius: 5px;
+        background-color: #D0B097;
+        padding: 20px;
+        margin: 20px;
+
+        font-weight: bold;
+    }
 </style>

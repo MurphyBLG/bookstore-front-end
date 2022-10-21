@@ -1,8 +1,8 @@
-<AddBook v-if="addBookFormIsShown" @close="toggleAddButton(); loadData()" />
+<AddBook v-if="addBookFormIsShown" @close="toggleAddButton" />
 <div class="table_header">
     <MyBtn class="add_book_btn" btnText="Add book" @click="toggleAddButton" />
     <MyBtn class="edit_book_btn" btnText="Edit book" />
-    <MyBtn class="delete_book_btn" btnText="Delete book" />
+    <MyBtn class="delete_book_btn" btnText="Delete book" @click="deleteBook"/>
 </div>
 
 <table class="books_table">
@@ -16,9 +16,9 @@
     </thead>
 
     <tbody>
-        <tr v-for="record in recordsToShow" :key="record.BookId">
+        <tr v-for="(record, index) in recordsToShow" :key="index">
             <td style="width: 40px">
-                <input type="radio" value="{{record.BookId}}" name="row">
+                <input type="radio" v-model="selectedObj" :value="[record.bookId, index]" name="row">
             </td>
             <td>{{record.name}}</td>
             <td>{{record.author}}</td>

@@ -8,6 +8,7 @@ export default {
             page: 0,
             recordsPerPage: 5,
             addBookFormIsShown: false,
+            selectedObj: null,
         };
     },
     components: { AddBook },
@@ -42,8 +43,18 @@ export default {
             this.page--;
         },
         toggleAddButton() {
+            this.loadData();
             this.addBookFormIsShown = !this.addBookFormIsShown;
         },
+        deleteBook() {
+            if (this.selectedObj === null) {
+                alert("You need to pick book to delete it!");
+            } else {
+                axios.delete(`https://localhost:7147/api/Book/${this.selectedObj[0]}`);
+                this.records.splice(this.page * 5 + this.selectedObj[1], 1);
+                this.selectedObj = null;
+            }
+        }
     },
     beforeMount() {
         this.loadData();

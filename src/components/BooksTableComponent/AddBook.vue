@@ -19,10 +19,7 @@
       <MyBtn
         class="confirm_book_addition"
         btnText="OK"
-        @click="
-          submit();
-          updateTable();
-        "
+        @click="submit"
       />
     </div>
   </div>
@@ -37,21 +34,16 @@ export default {
       this.$emit("close");
     },
     submit() {
-      const body = {
+      const bdy = {
         Name: this.bookName,
         Author: this.bookAuthor,
         Price: this.bookPrice,
       };
 
-      console.log(body);
-
-      axios.post("https://localhost:7147/api/Book", body).then((response) => {
-        console.log(response);
+      axios.post("https://localhost:7147/api/Book", bdy).then((response) => {
+        console.log(response.data);
       });
-    },
-    updateTable() {
-      this.$emit("updateTable");
-    },
+    }
   },
 };
 </script>

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import AddBook from '../AddBook.vue'
+import EditBook from '../EditBook.vue'
 
 export default {
     data() {
@@ -9,9 +10,10 @@ export default {
             recordsPerPage: 5,
             addBookFormIsShown: false,
             selectedObj: null,
+            editBookFormIsShown: false
         };
     },
-    components: { AddBook },
+    components: { AddBook, EditBook },
     methods: {
         loadData() {
             axios.get("https://localhost:7147/api/Book", { crossDomain: true }).then((response) => {
@@ -50,11 +52,15 @@ export default {
             if (this.selectedObj === null) {
                 alert("You need to pick book to delete it!");
             } else {
-                axios.delete(`https://localhost:7147/api/Book/${this.selectedObj[0]}`);
-                this.records.splice(this.page * 5 + this.selectedObj[1], 1);
+                axios.delete(`https://localhost:7147/api/Book/${this.selectedObj.bookId}`);
+                this.records.splice(this.page * 5 + this.selectedObj.bookIndex, 1);
                 this.selectedObj = null;
             }
-        }
+        },
+        toggleEditButton() {
+            this.loadData();
+            this.editBookFormIsShown = !this.editBookFormIsShown;
+        },
     },
     beforeMount() {
         this.loadData();

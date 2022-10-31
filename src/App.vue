@@ -1,5 +1,5 @@
 <template>
-  <MyHeader />
+  
   <router-view/>
 </template>
 
@@ -16,13 +16,5 @@
     margin: 0;
         
     background-color: #FAF2EB;
-  }
-  MyHeader {
-    display: flex;
-
-    width: 100%;
-    height: 50px;
-
-    background-color: #D0B097;
   }
 </style>

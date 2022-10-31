@@ -1,9 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MainPageView from '../views/MainPageView'
+import AuthView from '../views/AuthView'
+import RegisterView from '../views/RegisterView'
 
 const routes = [
   {
     path: '/',
+    name: 'authentication',
+    component: AuthView
+  },
+  {
+    path: '/sign_up',
+    name: 'registration',
+    component: RegisterView
+  },
+  {
+    path: '/home',
     name: 'home',
     component: MainPageView
   },

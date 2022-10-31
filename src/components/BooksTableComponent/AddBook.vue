@@ -5,15 +5,15 @@
         <p style="color: white; font-weight: bold">ADD BOOK</p>
       </div>
       <div class="book_name_input">
-        <label for="bookName">Название книги: </label>
+        <label for="bookName">Name: </label>
         <input type="text" v-model="bookName" />
       </div>
       <div class="book_author_input">
-        <label for="bookAuthor">Автор: </label>
+        <label for="bookAuthor">Author: </label>
         <input type="text" v-model="bookAuthor" />
       </div>
       <div class="book_price_input">
-        <label for="bookPrice">Цена: </label>
+        <label for="bookPrice">Price: </label>
         <input type="text" v-model="bookPrice" />
       </div>
       <MyBtn
@@ -40,9 +40,16 @@ export default {
         Price: this.bookPrice,
       };
 
+      if (bdy.Price < 0) {
+        alert("Price can't be less then 0!");
+        return;
+      }
+
       axios.post("https://localhost:7147/api/Book", bdy).then((response) => {
         console.log(response.data);
       });
+
+      alert("Book has been added");
     }
   },
 };

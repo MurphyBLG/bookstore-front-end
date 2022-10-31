@@ -74,6 +74,15 @@ export default {
         },
         totalPage() {
             return `Page ${this.page + 1} of ${this.pages}`;
+        },
+        userIsGuest() {
+            return (this.$store.state.auth.user.role === 'guest');
+        },
+        userIsOcherednyara() {
+            return (this.$store.state.auth.user.role === 'ocherednyara');
+        },
+        userIsAdmin() {
+            return (this.$store.state.auth.user.role === 'admin');
         }
     }
 }

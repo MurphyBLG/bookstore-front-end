@@ -1,4 +1,5 @@
 import axios from 'axios';
+import router from '@/router';
 
 export default {
     state: {
@@ -11,7 +12,7 @@ export default {
         },
     },
     getters: {
-
+        
     },
     actions: {
         async Register({ dispatch }, user) {
@@ -28,6 +29,7 @@ export default {
             .catch((error) => { alert(error.response.data) });
             console.log(newUser);
             await commit('setUser', newUser);
+            router.push('/home');
         },
         async LogOut({ commit }) {
             let user = null

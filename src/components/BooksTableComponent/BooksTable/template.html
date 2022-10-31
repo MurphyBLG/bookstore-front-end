@@ -2,9 +2,9 @@
 <EditBook v-if="editBookFormIsShown" :objData="selectedObj" @close="toggleEditButton"/>
 
 <div class="table_header">
-    <MyBtn class="add_book_btn" btnText="Add book" @click="toggleAddButton" />
-    <MyBtn class="edit_book_btn" :disabled="selectedObj === null" btnText="Edit book" :objData="selectedObj" @click="toggleEditButton"/>
-    <MyBtn class="delete_book_btn" btnText="Delete book" @click="deleteBook"/>
+    <MyBtn v-if="!userIsGuest" class="add_book_btn" btnText="Add book" @click="toggleAddButton" />
+    <MyBtn v-if="userIsAdmin" class="edit_book_btn" :disabled="selectedObj === null" btnText="Edit book" :objData="selectedObj" @click="toggleEditButton"/>
+    <MyBtn v-if="userIsAdmin" class="delete_book_btn" btnText="Delete book" @click="deleteBook"/>
 </div>
 
 <table class="books_table">

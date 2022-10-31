@@ -16,9 +16,23 @@
       </div>
 
       <div class="buttons">
-        <MyBtn class="confirm_book_addition" style="width: 100%" btnText="Log in" @click="logIn"/>
-        <MyBtn class="confirm_book_addition" style="width: 100%" btnText="Sign up"/>
-        <MyBtn class="confirm_book_addition" style="width: 100%; height: 57px; padding: 0px 20px 0px 20px;" btnText="Continue as guest"/>
+        <MyBtn
+          class="confirm_book_addition"
+          style="width: 100%"
+          btnText="Log in"
+          @click="logIn"
+        />
+        <MyBtn
+          class="confirm_book_addition"
+          style="width: 100%"
+          btnText="Sign up"
+        />
+        <MyBtn
+          class="confirm_book_addition"
+          style="width: 100%; height: 57px; padding: 0px 20px 0px 20px"
+          btnText="Continue as guest"
+          @click="goHome"
+        />
       </div>
     </div>
   </div>
@@ -26,25 +40,29 @@
 
 <script>
 import { mapActions } from "vuex";
+import router from "@/router";
 
 export default {
   data() {
     return {
       login: "",
       password: "",
-    }
+    };
   },
   methods: {
     ...mapActions(["LogIn"]),
     async logIn() {
       const user = {
         username: this.login,
-        password: this.password
-      }
+        password: this.password,
+      };
       await this.LogIn(user);
+    },
+    async goHome() {
+      router.push('/home')
     }
-  }
-}
+  },
+};
 </script>
 
 <style>
@@ -70,7 +88,7 @@ export default {
   background: #faf2eb;
   border-radius: 5px;
 
-  top:50%;
+  top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
@@ -83,7 +101,8 @@ export default {
   align-items: center;
 }
 
-.login_input, .password_input {
+.login_input,
+.password_input {
   display: flex;
   justify-content: space-between;
   align-items: center;

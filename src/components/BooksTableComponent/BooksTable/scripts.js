@@ -1,6 +1,7 @@
 import axios from 'axios'
 import AddBook from '../AddBook.vue'
 import EditBook from '../EditBook.vue'
+import { mapMutations } from 'vuex'
 
 export default {
     data() {
@@ -15,6 +16,9 @@ export default {
     },
     components: { AddBook, EditBook },
     methods: {
+        ...mapMutations([
+            'addToCart'
+        ]),
         loadData() {
             axios.get("https://localhost:7147/api/Book", { crossDomain: true }).then((response) => {
                 this.records = response.data;
@@ -61,6 +65,9 @@ export default {
             this.loadData();
             this.editBookFormIsShown = !this.editBookFormIsShown;
         },
+        addBookToCart(book) {
+            this.$store.commit('addToCart', book);
+        }
     },
     beforeMount() {
         this.loadData();

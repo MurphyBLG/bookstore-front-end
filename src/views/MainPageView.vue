@@ -8,9 +8,13 @@
 </template>
 
 <script>
-import BooksTable from "@/components/BooksTableComponent/BooksTable/BooksTable.vue";
+import BooksTable from "@/components/BooksTableComponent/BooksTable/BooksTable.vue"
+import MyHeader from "@/components/MyHeader.vue";
 export default {
-  components: { BooksTable },
+  created() {
+
+  },
+  components: { BooksTable, MyHeader },
 };
 </script>
 

@@ -26,6 +26,7 @@
           class="confirm_book_addition"
           style="width: 100%"
           btnText="Sign up"
+          @click="signUp"
         />
         <MyBtn
           class="confirm_book_addition"
@@ -60,6 +61,9 @@ export default {
     },
     async goHome() {
       router.push('/home')
+    },
+    async signUp() {
+      router.push('/sign_up')
     }
   },
 };

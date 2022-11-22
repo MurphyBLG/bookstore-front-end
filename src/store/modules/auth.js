@@ -4,6 +4,7 @@ import router from '@/router';
 export default {
     state: {
         user: {
+            token: null,
             username: null,
             name: null,
             surname: null,
@@ -12,21 +13,25 @@ export default {
         },
     },
     getters: {
-        
+
     },
     actions: {
         async Register({ dispatch }, user) {
-            await axios.post('https://localhost:7147/api/SignUp', user)
+            var err = await axios.post('https://localhost:7147/api/SignUp', user)
                 .catch((error) => {
                     alert(error.response.data);
+                    return true;
                 });
 
+            if (err === true) {
+                return;
+            }
             await dispatch('LogIn', user);
         },
         async LogIn({ commit }, user) {
             const newUser = await axios.post("https://localhost:7147/api/Login", user)
-            .then((response) => { return response.data })
-            .catch((error) => { alert(error.response.data) });
+                .then((response) => { return response.data })
+                .catch((error) => { alert(error.response.data) });
             console.log(newUser);
             await commit('setUser', newUser);
             router.push('/home');

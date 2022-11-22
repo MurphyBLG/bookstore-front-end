@@ -14,6 +14,7 @@
             <th>Book name</th>
             <th>Author</th>
             <th>Price</th>
+            <th v-if="!userIsGuest"></th>
         </tr>
     </thead>
 
@@ -31,6 +32,7 @@
             <td>{{record.name}}</td>
             <td>{{record.author}}</td>
             <td>{{record.price}}</td>
+            <td v-if="!userIsGuest"><MyBtn class="add_book_btn" style="margin: 0;" btnText="Add to cart" @click="addBookToCart({name:record.name, price:record.price})"/></td>
         </tr>
     </tbody>
 </table>

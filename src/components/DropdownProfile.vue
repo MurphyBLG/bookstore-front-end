@@ -5,27 +5,50 @@
   
 
   <div class="sub-menu" v-if="isOpen">
-    <div v-for="(item, i) in items" :key="i">
-      <a class="menu-item" :href="item.link"> {{ item.title }} </a>
+    <div v-if="!userIsGuest">
+      <a class="menu-item" href="#">Profile</a>
+    </div>
+
+    <div v-if="!userIsGuest">
+      <a class="menu-item" href="#">Orders</a>
+    </div>
+    
+    <div v-if="!userIsGuest">
+      <a class="menu-item" href="#" @click="LogOut()">Logout</a>
+    </div>
+
+    <div v-if="userIsGuest">
+      <a class="menu-item" href="/">Log in</a>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
-  props: ["items"],
   data() {
     return {
-      isOpen: false
+      isOpen: false,
     }
   },
   methods: {
+    ...mapActions(["LogOut"]),
     toggleDD() {
       this.isOpen = !this.isOpen;
     },
     closeDD() {
       this.isOpen = false;
+    },
+    logOut() {
+      this.LogOut();
+      return true;
     }
+  },
+  computed: {
+    userIsGuest() {
+      return this.$store.state.auth.user.role === "guest";
+    },
   }
 };
 </script>
@@ -42,5 +65,6 @@ export default {
   text-decoration: none;
   color: white;
   font-weight: bold;
+  margin: 10px;
 }
 </style>

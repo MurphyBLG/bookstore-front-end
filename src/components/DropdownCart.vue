@@ -19,7 +19,7 @@
         <td>{{ item[1] }}</td>
       </tr>
       <tr>
-        <td></td>
+        <td><MyBtn class="make-order__btn" style="margin: 0;" btnText="Make order" @click="makeOrder()"/></td>
         <td>Total:</td>
         <td>{{ this.$store.state.cart.total }}</td>
       </tr>
@@ -38,7 +38,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["countTotal"]),
+    ...mapMutations(["countTotal", "makeOrder"]),
     toggleDD() {
       this.isOpen = !this.isOpen;
       this.countTotal();
@@ -46,6 +46,9 @@ export default {
     closeDD() {
       this.isOpen = false;
     },
+    makeOrder() {
+      this.makeOrder();
+    }
   },
 };
 </script>

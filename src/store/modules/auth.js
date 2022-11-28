@@ -34,19 +34,27 @@ export default {
                 .catch((error) => { alert(error.response.data) });
             console.log(newUser);
             await commit('setUser', newUser);
+            commit('getCart', newUser.token, { root: true });
             router.push('/home');
         },
         async LogOut({ commit }) {
-            let user = null
-            commit('logout', user)
+            commit('logOut');
+            router.push('/');
         }
     },
     mutations: {
         setUser(state, user) {
             state.user = user
         },
-        LogOut(state) {
-            state.user = null
+        logOut(state) {
+            state.user = {
+                token: null,
+                username: null,
+                name: null,
+                surname: null,
+                email: null,
+                role: "guest"
+            };
         },
     }
 };

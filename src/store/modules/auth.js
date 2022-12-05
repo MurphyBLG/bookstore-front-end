@@ -39,7 +39,31 @@ export default {
         },
         async LogOut({ commit }) {
             commit('logOut');
+            sessionStorage.clear();
             router.push('/');
+        },
+        async postUserInfo({ state }) {
+            var config = {
+                method: 'put',
+                url: 'https://localhost:7147/api/Profile',
+                headers: {
+                    'Authorization': `Bearer ${this.state.auth.user.token}`
+                },
+                data: {
+                    token: state.user.token,
+                    username: state.user.username,
+                    name: state.user.name,
+                    surname: state.user.surname,
+                    email: state.user.email,
+                    role: state.user.role
+                }
+            };
+
+            await axios(config)
+                .catch((error) => {
+                    alert(error.response.data);
+                    return true;
+                });
         }
     },
     mutations: {
@@ -56,5 +80,10 @@ export default {
                 role: "guest"
             };
         },
+        changeUserInfo(state, { name, surname, email }) {
+            state.user.name = name;
+            state.user.surname = surname;
+            state.user.email = email;
+        }
     }
 };

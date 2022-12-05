@@ -6,11 +6,11 @@
 
   <div class="sub-menu" v-if="isOpen">
     <div v-if="!userIsGuest">
-      <a class="menu-item" href="#">Profile</a>
+      <a class="menu-item" href="/profile">Profile</a>
     </div>
 
     <div v-if="!userIsGuest">
-      <a class="menu-item" href="#">Orders</a>
+      <a class="menu-item" href="/orders">Orders</a>
     </div>
     
     <div v-if="!userIsGuest">

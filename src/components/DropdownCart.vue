@@ -19,7 +19,7 @@
         <td>{{ item[1] }}</td>
       </tr>
       <tr>
-        <td><MyBtn class="make-order__btn" style="margin: 0;" btnText="Make order" @click="makeOrder()"/></td>
+        <td><MyBtn class="make-order__btn" style="margin: 0;" btnText="Make order" @click="makeOrderCall()"/></td>
         <td>Total:</td>
         <td>{{ this.$store.state.cart.total }}</td>
       </tr>
@@ -46,7 +46,7 @@ export default {
     closeDD() {
       this.isOpen = false;
     },
-    makeOrder() {
+    makeOrderCall() {
       this.makeOrder();
     }
   },

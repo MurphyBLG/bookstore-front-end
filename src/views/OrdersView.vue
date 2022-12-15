@@ -29,7 +29,6 @@ export default {
     }
 
     this.orders = (await axios(config)).data;
-    console.log(this.orders);
   }
 }
 

@@ -11,7 +11,8 @@ export default {
             recordsPerPage: 5,
             addBookFormIsShown: false,
             selectedObj: null,
-            editBookFormIsShown: false
+            editBookFormIsShown: false,
+            sortByName: false
         };
     },
     components: { AddBook, EditBook },
@@ -67,6 +68,9 @@ export default {
         },
         addBookToCart(book) {
             this.$store.commit('addToCart', book);
+        },
+        toggleSortByName() {
+            this.sortByName = !this.sortByName;
         }
     },
     beforeMount() {
@@ -74,6 +78,12 @@ export default {
     },
     computed: {
         recordsToShow() {
+            if (this.sortByName) {
+                return this.records.slice(this.page * this.recordsPerPage,
+                    Math.min(this.page * this.recordsPerPage + 5,
+                    this.records.length))
+                    .sort((a, b) => { return a.name[0].toLowerCase() > b.name[0].toLowerCase() });
+            }
             return this.records.slice(this.page * this.recordsPerPage, Math.min(this.page * this.recordsPerPage + 5, this.records.length));
         },
         pages() {

@@ -47,13 +47,13 @@ export default {
     ...mapMutations(['changeUserInfo']),
     ...mapActions(['postUserInfo']),
     callChangeUserInfoMutation() {
-      this.changeUserInfo({
+      if (this.changeUserInfo({
         name: this.name,
         surname: this.surname,
         email: this.eMail
-      });
-      
-      this.postUserInfo();
+      })) {
+        this.postUserInfo();
+      }
     }
   }
 

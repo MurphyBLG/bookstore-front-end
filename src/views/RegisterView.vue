@@ -31,18 +31,13 @@
       </div>
 
       <div class="buttons">
-        <MyBtn
-          class="confirm_book_addition"
-          style="width: 100%"
-          btnText="OK"
-          @click="signUp"
-        />
+        <MyBtn class="confirm_book_addition" style="width: 100%" btnText="OK" @click="signUp" />
       </div>
     </div>
   </div>
 </template>
   
-  <script>
+<script>
 import { mapActions } from "vuex";
 
 export default {
@@ -65,14 +60,32 @@ export default {
         surname: this.surname,
         eMail: this.eMail,
       };
-      console.log(user);
+
+      const validateEmail = (email) => {
+        return String(email)
+          .toLowerCase()
+          .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          );
+      };
+
+      if (!validateEmail(user.eMail)) {
+        alert('Incorrect email format');
+        return;
+      }
+
+      if (user.password.length < 6) {
+        alert('Password must be more than 6 characters long');
+        return;
+      }
+
       await this.Register(user);
     },
   },
 };
 </script>
   
-  <style>
+<style>
 .sign_up_backdrop {
   display: flex;
   align-content: center;
